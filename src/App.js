@@ -1,10 +1,9 @@
 import './App.css';
-import StarWarsCharacters from './page/StarWarsCharacters';
-
+import Routing from "./routing";
 function App() {
   return (
     <div className="App">
-      <StarWarsCharacters/>
+      <Routing />
     </div>
   );
 }

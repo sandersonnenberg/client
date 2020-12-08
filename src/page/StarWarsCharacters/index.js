@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Spin, message, Button, Popover } from "antd";
 import "./styles.css";
 import CharactersTable from "../../sharedComponents/CharactersTable";
 export default function StarWarsCharacters() {
@@ -8,26 +7,28 @@ export default function StarWarsCharacters() {
 
   useEffect(() => {
     getStarWarsCharacters();
-  }, []);
+  }, );
 
   return (
     <div className="page-container">
-      <h1>Star Wars Characters Page</h1>
 
       {dataLoaded && <CharactersTable data={characters} />}
     </div>
   );
 
-  function getAllStarwarsPeople() {
-    let people = [];
+  //get all characters from api
+ async function getAllStarwarsPeople() {
     let promises = [];
-    fetch("https://swapi.dev/api/people/")
+    let charactersData=[];
+    const path ="https://swapi.dev/api/people"; 
+
+    fetch(path)
       .then((response) => response.json())
       .then((data) => {
         const numberOfPagesLeft = Math.ceil((data.count - 1) / 10);
 
         for (let index = 1; index <= numberOfPagesLeft; index++) {
-          promises.push(fetch(`https://swapi.dev/api/people?page=${index}`));
+          promises.push(fetch(`${path}?page=${index}`));
         }
         return Promise.all(promises);
       })
@@ -39,22 +40,15 @@ export default function StarWarsCharacters() {
             resIndex < responses[index].results.length;
             resIndex++
           )
-            people.push(responses[index].results[resIndex]);
+          charactersData.push(responses[index].results[resIndex]);
         }
-        setCharacters(people);
+        setCharacters(charactersData);
         setDataLoaded(true);
-      });
-
-    // setCharacters([
-    //   { key: 1, name: "sander",mass:1 },
-    //   { key: 2, name: "moshe",mass:2 },
-    // ]);
-    // setDataLoaded(true);
+      }); 
   }
 
   function getStarWarsCharacters() {
-    (async () => {
-      const starwarsPeople = await getAllStarwarsPeople();
+    (async () => { await getAllStarwarsPeople();
     })();
   }
 }

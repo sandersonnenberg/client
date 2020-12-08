@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.routing-item{
+  display: inline-block;
+  margin-left: 2px;
+  margin-right: 2px;
+  color:#d9d9d9;
+
+}
+.routing-item a{
+  color:#d9d9d9;
+  font-size: large;
+  font-weight: 600;
+}
+.hr-routing{
+  color: #d9d9d9;
+}
