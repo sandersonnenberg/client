@@ -118,9 +118,6 @@ export default function CharactersTable({ data }) {
   };
   const hasSelected = !selectedRowKeys ? false : selectedRowKeys.length > 0;
 
-
-
-
   return (
     <div className="table-container">
       <div style={{ marginBottom: 16, display: 'flex' }}>
